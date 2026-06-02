@@ -20,11 +20,17 @@ load_dotenv(find_dotenv(), override=True)
 if "GOOGLE_API_KEY" not in os.environ and "GEMINI_API_KEY" in os.environ:
     os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
 
-# Initialize Database
-from database.auth_db import init_db, create_user, get_user_by_username, get_user_by_google_id, get_user_by_id
-from auth.security import create_access_token, decode_access_token, hash_password, verify_password
+try:
+    # Initialize Database
+    from database.auth_db import init_db, create_user, get_user_by_username, get_user_by_google_id, get_user_by_id
+    from auth.security import create_access_token, decode_access_token, hash_password, verify_password
 
-init_db()
+    init_db()
+except Exception as e:
+    import traceback
+    print("CRITICAL STARTUP ERROR: Failed to initialize application:", e)
+    traceback.print_exc()
+    sys.exit(1)
 
 USAGE_FILE = "data/usage.json"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -75,15 +81,21 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     return user
 
 
-from rag.memory import (
-    get_session_history,
-    save_session_message,
-    get_history_for_prompt
-)
+try:
+    from rag.memory import (
+        get_session_history,
+        save_session_message,
+        get_history_for_prompt
+    )
 
-from rag.ingest import ingest_document
-from rag.retrieve1 import query_rag, delete_document_from_vectorstore
-from metadata.tracker import log_document, get_all_documents, delete_document_metadata
+    from rag.ingest import ingest_document
+    from rag.retrieve1 import query_rag, delete_document_from_vectorstore
+    from metadata.tracker import log_document, get_all_documents, delete_document_metadata
+except Exception as e:
+    import traceback
+    print("CRITICAL STARTUP ERROR: Failed to import submodules:", e)
+    traceback.print_exc()
+    sys.exit(1)
 
 app = FastAPI(title="MindVault API")
 
