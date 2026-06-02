@@ -102,7 +102,14 @@ app = FastAPI(title="MindVault API")
 
 cors_origins_raw = os.environ.get("CORS_ORIGINS", "")
 if cors_origins_raw:
-    cors_origins = [origin.strip() for origin in cors_origins_raw.split(",") if origin.strip()]
+    raw_origins = [origin.strip() for origin in cors_origins_raw.split(",") if origin.strip()]
+    cors_origins = []
+    for origin in raw_origins:
+        cors_origins.append(origin)
+        if origin.endswith("/"):
+            cors_origins.append(origin[:-1])
+        else:
+            cors_origins.append(origin + "/")
 else:
     cors_origins = [
         "http://localhost:3000",

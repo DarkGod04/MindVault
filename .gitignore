@@ -28,6 +28,8 @@ build/
 out/
 
 # Database and Data Storage
+data/
+backend/data/
 backend/data/mindvault.db
 backend/data/mindvault.db-journal
 backend/data/sessions.json
