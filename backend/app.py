@@ -101,6 +101,7 @@ except Exception as e:
 app = FastAPI(title="MindVault API")
 
 cors_origins_raw = os.environ.get("CORS_ORIGINS", "")
+allow_origin_regex = None
 if cors_origins_raw:
     raw_origins = [origin.strip() for origin in cors_origins_raw.split(",") if origin.strip()]
     cors_origins = []
@@ -110,6 +111,19 @@ if cors_origins_raw:
             cors_origins.append(origin[:-1])
         else:
             cors_origins.append(origin + "/")
+        
+        # Automatically generate regex to support Vercel preview deployments
+        if "vercel.app" in origin:
+            try:
+                # e.g., Extract prefix 'mind-vault' from 'https://mind-vault-bice.vercel.app'
+                domain = origin.split("://")[1].split("/")[0]
+                subdomain = domain.split(".")[0]
+                if "-" in subdomain:
+                    parts = subdomain.split("-")
+                    prefix = "-".join(parts[:-1])
+                    allow_origin_regex = rf"https://{prefix}-.*\.vercel\.app"
+            except Exception:
+                pass
 else:
     cors_origins = [
         "http://localhost:3000",
@@ -121,6 +135,7 @@ else:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_origin_regex=allow_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
