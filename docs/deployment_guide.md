@@ -67,3 +67,20 @@ To prevent unauthorized domains from hitting your backend API:
 2. Navigate to **Environment**.
 3. Update the `CORS_ORIGINS` variable to match your newly generated Vercel production URL (e.g., `https://your-mindvault.vercel.app`).
 4. Save the changes. Render will redeploy automatically with CORS protection fully enabled!
+
+---
+
+## 🔑 Step 5: Google OAuth Setup (For Google Sign-In)
+
+If Google Sign-In works in development but fails in production, it is because Google's servers reject requests originating from your newly deployed Vercel domain.
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Select your project and navigate to **APIs & Services** -> **Credentials**.
+3. Under **OAuth 2.0 Client IDs**, click the edit icon (pencil) next to your Client ID.
+4. Scroll down to the **Authorized JavaScript Origins** section.
+5. Click **+ ADD URI** and enter your deployed Vercel frontend URL:
+   - For example: `https://your-mindvault.vercel.app`
+   - *Note: Do not include a trailing slash `/` at the end of the URL.*
+6. Click **Save** at the bottom of the page.
+7. *Note: It may take 5–10 minutes for Google to update its global DNS cache and recognize the new origin. Clear your browser cache and cookies if you still see errors immediately after saving.*
+

@@ -87,7 +87,7 @@ function App() {
           if (buttonElement) {
             window.google.accounts.id.renderButton(
               buttonElement,
-              { theme: "outline", size: "large", width: 360 }
+              { theme: "filled_black", shape: "pill", size: "large", width: 360 }
             );
           }
         } catch (err) {
