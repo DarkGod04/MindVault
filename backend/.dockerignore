@@ -1,0 +1,38 @@
+# Local Python Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# Python Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local databases and user-specific document storage
+data/docs/
+data/mindvault.db
+data/sessions.json
+data/documents.json
+data/usage.json
+
+# Local FAISS vector stores
+vectorstore1/
+vectorstore_gemini/
+vectorstore_ollama/
+vectorstore_gemini_*/
+vectorstore_ollama_*/
+
+# IDE Settings
+.vscode/
+.idea/
+
+# Git folder
+.git/
+.gitignore
+
+# Exports and graphs
+export/
+graph/

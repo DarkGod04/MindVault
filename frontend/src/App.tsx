@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageSquare, UploadCloud, LayoutDashboard, Database, RefreshCw, LogOut, Key, User, ShieldAlert } from 'lucide-react';
+import { MessageSquare, UploadCloud, LayoutDashboard, Database, RefreshCw, LogOut, ShieldAlert } from 'lucide-react';
 import { ChatTab } from './components/ChatTab';
 import { UploadTab } from './components/UploadTab';
 import { DashboardTab } from './components/DashboardTab';
