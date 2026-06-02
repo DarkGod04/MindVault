@@ -53,8 +53,10 @@ Vercel will build and host the React + TypeScript frontend statically.
    - **Framework Preset**: `Vite`
    - **Root Directory**: `frontend`
 5. Expand the **Environment Variables** section and add:
-   - Name: `VITE_API_URL`
-   - Value: *[Your Render backend URL (e.g., `https://mindvault-backend.onrender.com`)]*
+   - **Name**: `VITE_API_URL`
+   - **Value**: *[Your Render backend URL (e.g., `https://mindvault-backend.onrender.com`)]*
+   - **Name**: `VITE_GOOGLE_CLIENT_ID`
+   - **Value**: *[Your Google Client ID from Google Cloud Console (e.g., `766662978879-...apps.googleusercontent.com`)]*
 6. Click **Deploy**.
 7. Vercel will compile and host the app, providing a production URL (e.g., `https://your-mindvault.vercel.app`).
 
