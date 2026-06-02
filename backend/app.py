@@ -1,3 +1,4 @@
+print(">>> STARTING APP.PY IMPORT <<<")
 import os
 import sys
 # Insert current directory (backend/) into sys.path to handle root-level execution
