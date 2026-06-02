@@ -34,7 +34,7 @@ Render will build and host our FastAPI service using the custom `Dockerfile`.
    - **Instance Type**: `Free`
 5. Click **Advanced** to add the following **Environment Variables**:
    - `DATABASE_URL`: *[Your Neon Connection String]*
-   - `JWT_SECRET`: *[A long secure random string, e.g., run `openssl rand -hex 32` in your terminal]*
+   - `JWT_SECRET`: *[A long secure random string, e.g., run `python -c "import secrets; print(secrets.token_hex(32))"` in your terminal]*
    - `GEMINI_API_KEY`: *[Your Google AI Studio API key]*
    - `CORS_ORIGINS`: *[Your Vercel URL (e.g. `https://your-mindvault.vercel.app` - you can update this after Vercel is set up)]*
 6. Click **Create Web Service**.
