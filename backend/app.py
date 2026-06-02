@@ -1,3 +1,8 @@
+import os
+import sys
+# Insert current directory (backend/) into sys.path to handle root-level execution
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from fastapi import FastAPI, UploadFile, File, HTTPException, Header, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
